@@ -1,6 +1,8 @@
 export interface pokeType {
-  url: string;
-  name: string;
+  type: {
+    url: string;
+    name: string;
+  };
 }
 
 export interface pokeNameUrl {
@@ -18,5 +20,6 @@ export interface pokeMainData {
   data: {
     types: pokeType[];
     name: string;
+    id: number;
   };
 }

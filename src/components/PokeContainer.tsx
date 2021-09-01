@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPokeList, getBasicApi } from '../service/pokeService';
 import { pokeNameUrl, pokeMainData } from '../model/pokeModels';
-import { Button, Container } from '@material-ui/core';
+import { Button, Container, Grid } from '@material-ui/core';
 import { PokemonCard } from './subcomponents/PokemonCard';
 
 export const PokeContainer: React.FC = () => {
@@ -27,17 +27,15 @@ export const PokeContainer: React.FC = () => {
   return (
     <div style={{ height: '100%' }}>
       <Container maxWidth="md" style={{ backgroundColor: 'black', height: '100%' }}>
-        <Button variant="contained" onClick={() => loadMorePokemon()}>
-          Load More
-        </Button>
-        {pokeList.map((pokemon, index) => {
-          return <PokemonCard name={pokemon.data.name} />;
-        })}
+        <Grid container justifyContent="center">
+          {pokeList.map((pokemon, index) => {
+            return <PokemonCard key={index} pokeMainData={pokemon} />;
+          })}
+          <Button variant="contained" onClick={() => loadMorePokemon()}>
+            Load More
+          </Button>
+        </Grid>
       </Container>
-
-      {/* {pokeList.map((pokemon, index) => {
-        return <p key={index}>{pokemon.data.name}</p>;
-      })} */}
     </div>
   );
 };
