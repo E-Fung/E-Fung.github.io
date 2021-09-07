@@ -10,6 +10,16 @@ export interface pokeNameUrl {
   name: string;
 }
 
+export interface typeNameUrl {
+  pokemon: pokeNameUrl;
+}
+
+export interface typeNameUrlObj {
+  data: {
+    pokemon: typeNameUrl[];
+  };
+}
+
 export interface pokeNameUrlObj {
   data: {
     results: pokeNameUrl[];
