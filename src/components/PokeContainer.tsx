@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPokeList, getBasicPoke, getBasicType, getTypePokeList } from '../service/pokeService';
 import { pokeNameUrl, pokeMainData, typeNameUrl } from '../model/pokeModels';
-import { Button, Container, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { PokemonCard } from './subcomponents/PokemonCard';
 import { useAppContext } from '../AppContext';
 
@@ -24,7 +24,7 @@ export const PokeContainer: React.FC = () => {
     setPokeList((p) => [...p, ...additionalPokemons]);
   };
 
-  const loadPokemonType = async (offsetParam: boolean) => {
+  const loadPokemonType = async (offsetParam: boolean): void => {
     let pokemonOffset: number = offsetParam ? pokeList.length + 20 : 20;
     let typeUrl: string = `https://pokeapi.co/api/v2/type/${currType}`;
     let listBasicPoke: typeNameUrl[] = (await getBasicType(typeUrl)).data.pokemon;
@@ -39,19 +39,15 @@ export const PokeContainer: React.FC = () => {
   };
 
   return (
-    <div style={{ height: '100%' }}>
-      <Container maxWidth="md" style={{ backgroundColor: 'black', height: '100%' }}>
-        <Grid container justifyContent="center">
-          {pokeList.map((pokemon, index) => {
-            return <PokemonCard key={index} pokeMainData={pokemon} />;
-          })}
-          <Grid container style={{ width: '100%' }} justifyContent="center">
-            <Button variant="contained" onClick={() => loadMorePokemon(true)}>
-              Load More
-            </Button>
-          </Grid>
-        </Grid>
-      </Container>
-    </div>
+    <Grid container justifyContent="center">
+      {pokeList.map((pokemon, index) => {
+        return <PokemonCard key={index} pokeMainData={pokemon} />;
+      })}
+      <Grid container style={{ width: '100%' }} justifyContent="center">
+        <Button variant="contained" onClick={() => loadMorePokemon(true)}>
+          Load More
+        </Button>
+      </Grid>
+    </Grid>
   );
 };

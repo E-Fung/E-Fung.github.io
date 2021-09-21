@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     backgroundColor: 'white',
     position: 'relative',
-    margin: '5px',
+    margin: '8px',
   },
   pokeBounce: {
     animation: `$bounce 300ms ${theme.transitions.easing.easeInOut}`,
@@ -53,7 +53,9 @@ export const PokemonCard: React.FC<Props> = ({ pokeMainData }) => {
                 <PokePic id={pokeMainData.data.id} />
               </Grid>
               <Grid style={{ margin: '2px' }}>
-                <Typography style={{ textAlign: 'center' }}>{capFirstLetter(pokeMainData.data.name)}</Typography>
+                <Typography variant="h6" style={{ textAlign: 'center' }}>
+                  {capFirstLetter(pokeMainData.data.name)}
+                </Typography>
               </Grid>
               <Grid style={{ margin: '2px' }}>
                 <PokeType types={pokeMainData.data.types} />

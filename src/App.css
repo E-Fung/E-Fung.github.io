@@ -1,6 +1,10 @@
 html,
 #app,
 #app > div,
-#root {
+body {
   height: 100%;
+}
+
+#root {
+  height: auto;
 }
