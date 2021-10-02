@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = { pokeMainData: pokeMainData };
 
-export const PokemonCard: React.FC<Props> = ({ pokeMainData }) => {
+export const PokeCard: React.FC<Props> = ({ pokeMainData }) => {
   const [hover, setHover] = useState(false as boolean);
   const classes = useStyles();
 
@@ -47,7 +47,7 @@ export const PokemonCard: React.FC<Props> = ({ pokeMainData }) => {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <Grid style={{ background: getPokeScheme(pokeMainData.data.types), padding: '5px' }}>
+          <Grid style={{ background: getPokeScheme(pokeMainData.data.types, '0.35'), padding: '5px' }}>
             <Grid container direction="column">
               <Grid item style={{ margin: '2px' }}>
                 <PokePic id={pokeMainData.data.id} />

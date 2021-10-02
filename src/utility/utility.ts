@@ -20,52 +20,52 @@ export const capFirstLetter = (name: string): string => {
   return result;
 };
 
-export const getPokeScheme = (pokeTypes: pokeType[]): string => {
-  let left: string = matchColor(pokeTypes[0].type.name);
-  let right: string = pokeTypes.length >= 2 ? matchColor(pokeTypes[1].type.name) : left;
+export const getPokeScheme = (pokeTypes: pokeType[], opacity: string): string => {
+  let left: string = matchColor(pokeTypes[0].type.name, opacity);
+  let right: string = pokeTypes.length >= 2 ? matchColor(pokeTypes[1].type.name, opacity) : left;
   return `linear-gradient( to right, ${left}, ${right})`;
 };
 
-export const matchColor = (type: string): string => {
+export const matchColor = (type: string, opacity: string): string => {
   switch (type) {
     case 'none':
       return 'white';
     case 'fire':
-      return 'rgb(240, 128, 48, 0.35)';
+      return `rgb(240, 128, 48, ${opacity})`;
     case 'grass':
-      return 'rgb(120, 200, 80, 0.35)';
+      return `rgb(120, 200, 80, ${opacity})`;
     case 'ground':
-      return 'rgb(224, 192, 104, 0.35)';
+      return `rgb(224, 192, 104, ${opacity})`;
     case 'bug':
-      return 'rgb(168, 184, 32, 0.35)';
+      return `rgb(168, 184, 32, ${opacity})`;
     case 'dark':
-      return 'rgb(112, 88, 72, 0.35)';
+      return `rgb(112, 88, 72, ${opacity})`;
     case 'dragon':
-      return 'rgb(112, 56, 248, 0.35)';
+      return `rgb(112, 56, 248, ${opacity})`;
     case 'electric':
-      return 'rgb(248, 208, 48, 0.35)';
+      return `rgb(248, 208, 48, ${opacity})`;
     case 'fairy':
-      return 'rgb(238, 153, 172, 0.35)';
+      return `rgb(238, 153, 172, ${opacity})`;
     case 'fighting':
-      return 'rgb(192, 48, 40, 0.35)';
+      return `rgb(192, 48, 40, ${opacity})`;
     case 'flying':
-      return 'rgb(168, 144, 240, 0.35)';
+      return `rgb(168, 144, 240, ${opacity})`;
     case 'ghost':
-      return 'rgb(112, 88, 152, 0.35)';
+      return `rgb(112, 88, 152, ${opacity})`;
     case 'ice':
-      return 'rgb(152, 216, 216, 0.35)';
+      return `rgb(152, 216, 216, ${opacity})`;
     case 'normal':
-      return 'rgb(168, 168, 120, 0.35)';
+      return `rgb(168, 168, 120, ${opacity})`;
     case 'poison':
-      return 'rgb(160, 64, 160, 0.35)';
+      return `rgb(160, 64, 160, ${opacity})`;
     case 'psychic':
-      return 'rgb(248, 88, 136, 0.35)';
+      return `rgb(248, 88, 136, ${opacity})`;
     case 'rock':
-      return 'rgb(184, 160, 56, 0.5)';
+      return `rgb(184, 160, 56, ${opacity})`;
     case 'steel':
-      return 'rgb(184, 184, 208, 0.35)';
+      return `rgb(184, 184, 208, ${opacity})`;
     case 'water':
-      return 'rgb(104, 144, 240, 0.35)';
+      return `rgb(104, 144, 240, ${opacity})`;
     default:
       return 'white';
   }

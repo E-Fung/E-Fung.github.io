@@ -31,5 +31,13 @@ export interface pokeMainData {
     types: pokeType[];
     name: string;
     id: number;
+    species: {
+      url: string;
+    };
   };
+}
+
+export interface pokeEvol {
+  name: string;
+  url: string;
 }

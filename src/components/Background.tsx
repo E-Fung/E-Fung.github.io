@@ -28,7 +28,7 @@ export const Background: React.FC = () => {
         className={classes.sizing}
         style={{
           // background: `linear-gradient( to right, rgb(240, 128, 48, 0.35), rgb(120, 200, 80, 0.35))`,
-          backgroundColor: matchColor(currType),
+          backgroundColor: matchColor(currType, '0.35'),
         }}
       />
 

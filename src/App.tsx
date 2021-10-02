@@ -1,6 +1,6 @@
 import './App.css';
 import { PokeContainer } from './components/PokeContainer';
-import { PokeDetails } from './components/PokemonDetails/PokemonDetails';
+import { PokeDetails } from './components/PokeDetails/PokeDetails';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { AppContextProvider } from './AppContext';
 import { Container, Grid, makeStyles } from '@material-ui/core';

@@ -1,6 +1,18 @@
 import axios from 'axios';
 import { pokeNameUrlObj, pokeNameUrl, pokeMainData, typeNameUrlObj, typeNameUrl } from '../model/pokeModels';
 
+export const getSinglePoke = (apiUrl: string): Promise<pokeMainData> => {
+  return axios.get(apiUrl).then((resp: any) => resp);
+};
+
+export const getApiEvolData = (apiUrl: string) => {
+  return axios.get(apiUrl).then((resp: any) => resp);
+};
+
+export const getApiEvolUrl = (apiUrl: string) => {
+  return axios.get(apiUrl).then((resp: any) => resp);
+};
+
 export const getBasicPoke = (apiUrl: string): Promise<pokeNameUrlObj> => {
   return axios.get(apiUrl).then((resp: any) => resp);
 };

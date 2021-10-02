@@ -16,7 +16,7 @@ export const PokePic: React.FC<Props> = ({ id }) => {
   return (
     <img
       onClick={handlePokePicClick}
-      style={{ width: '100%', height: 'auto' }}
+      style={{ maxWidth: '100%', maxHeight: '100%', cursor: 'pointer' }}
       src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${altIndex}.png`}
       alt="Pokemon"
     ></img>
