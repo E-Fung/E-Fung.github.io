@@ -6,7 +6,7 @@ import { pokeMainData } from '../../model/pokeModels';
 import { PokeEvol } from './PokeEvol';
 import { getPokeScheme, capFirstLetter } from './../../utility/utility';
 import { PokeType } from '../subcomponents/PokeType';
-import PokeMenu from './PokeMenu';
+import { PokeMenu } from './PokeMenu';
 
 export const PokeDetails: React.FC = () => {
   const [currUrl] = useState(window.location.href as string);
@@ -26,6 +26,7 @@ export const PokeDetails: React.FC = () => {
     let speciesUrl: string = data.data.species.url;
     let speciesData: any = await getSinglePoke(speciesUrl);
     setPokeSpecies(speciesData);
+    console.log(data);
   };
 
   if (!pokeData || !pokeSpecies) {
@@ -44,12 +45,7 @@ export const PokeDetails: React.FC = () => {
           borderBottomRightRadius: '5%',
         }}
       >
-        <Grid item xs={3}>
-          <PokePic id={id} />
-        </Grid>
-        {/* <Grid item xs={3}>
-          <PokeType types={pokeData.data.types} />
-        </Grid> */}
+        <PokePic id={id} />
       </Grid>
       <Grid
         justifyContent="center"
@@ -70,7 +66,7 @@ export const PokeDetails: React.FC = () => {
         <PokeType types={pokeData.data.types} />
         <Typography>{pokeSpecies.data.flavor_text_entries[0].flavor_text.replace('\f', ' ')}</Typography>
         <Grid item xs={9}>
-          <PokeMenu />
+          <PokeMenu pokeData={pokeData} />
         </Grid>
       </Grid>
       <Grid container style={{ height: '20vh', width: '100%', backgroundColor: 'grey' }}>

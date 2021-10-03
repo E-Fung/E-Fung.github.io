@@ -36,3 +36,11 @@ export const getTypePokeList = (listPokeData: typeNameUrl[]): Promise<pokeMainDa
   }
   return Promise.all(promiseArray);
 };
+
+export const getListTypeInfo = (listType: any[]): Promise<any[]> => {
+  let promiseArray: any[] = [];
+  for (let i = 0; i < listType.length; i++) {
+    promiseArray.push(axios.get(listType[i].type.url));
+  }
+  return Promise.all(promiseArray);
+};

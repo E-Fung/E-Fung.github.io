@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Tab, Tabs, Typography } from '@material-ui/core';
-import { Background } from '../Background';
+import { PokeStats } from './PokeStats';
+import { PokeWeakness } from './PokeWeakness';
 
 enum PokeTab {
   Stats = 'Base Stats',
@@ -14,6 +15,8 @@ interface TabPanelProps {
   index: number;
   value: number;
 }
+
+type Props = { pokeData: any };
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -36,7 +39,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function PokeMenu() {
+export const PokeMenu: React.FC<Props> = ({ pokeData }) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -54,17 +57,22 @@ export default function PokeMenu() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {PokeTab.Stats}
+        <PokeStats pokeStats={pokeData.data.stats} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {PokeTab.Moves}
+        {pokeData.data.moves.map((move: any, index: number) => (
+          <Typography>{move.move.name}</Typography>
+        ))}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {PokeTab.Sprites}
+        <img src={pokeData.data.sprites.front_default} alt="front_default" />
+        <img src={pokeData.data.sprites.back_default} alt="back_default" />
+        <img src={pokeData.data.sprites.front_shiny} alt="front_shiny" />
+        <img src={pokeData.data.sprites.back_shiny} alt="back_shiny" />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        {PokeTab.Weakness}
+        <PokeWeakness pokeTypes={pokeData.data.types} />
       </TabPanel>
     </Box>
   );
-}
+};
