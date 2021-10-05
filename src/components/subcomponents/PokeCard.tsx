@@ -4,6 +4,7 @@ import { pokeMainData } from '../../model/pokeModels';
 import { PokePic } from './PokePic';
 import { getPokeScheme, capFirstLetter } from '../../utility/utility';
 import { PokeType } from './PokeType';
+import { IdBackground } from './IdBackground';
 import { Grow } from '@material-ui/core';
 import clsx from 'clsx';
 
@@ -39,6 +40,7 @@ export const PokeCard: React.FC<Props> = ({ pokeMainData }) => {
     <Grow in={true}>
       <Grid item xs={6} md={4} lg={3}>
         <Paper
+          id="paper"
           elevation={2}
           className={clsx({
             [classes.card]: true,
@@ -47,17 +49,20 @@ export const PokeCard: React.FC<Props> = ({ pokeMainData }) => {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <Grid style={{ background: getPokeScheme(pokeMainData.data.types, '0.35'), padding: '5px' }}>
-            <Grid container direction="column">
-              <Grid item style={{ margin: '2px' }}>
+          <Grid style={{ background: getPokeScheme(pokeMainData.data.types, '0.35') }}>
+            <Grid container direction="column" style={{ width: '100%', height: '100%' }}>
+              <Grid style={{ width: '100%', boxSizing: 'border-box', padding: '5px', height: '100%', position: 'absolute', zIndex: 5 }}>
+                <IdBackground id={pokeMainData.data.id.toString().padStart(3, '0')} />
+              </Grid>
+              <Grid item style={{ padding: '5px', margin: '2px', zIndex: 10 }}>
                 <PokePic id={pokeMainData.data.id} />
               </Grid>
-              <Grid style={{ margin: '2px' }}>
+              <Grid style={{ padding: '5px', margin: '2px' }}>
                 <Typography variant="h6" style={{ textAlign: 'center' }}>
                   {capFirstLetter(pokeMainData.data.name)}
                 </Typography>
               </Grid>
-              <Grid style={{ margin: '2px' }}>
+              <Grid style={{ padding: '5px', margin: '2px' }}>
                 <PokeType types={pokeMainData.data.types} />
               </Grid>
             </Grid>

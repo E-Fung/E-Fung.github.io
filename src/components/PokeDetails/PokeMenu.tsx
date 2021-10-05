@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Tab, Tabs, Typography } from '@material-ui/core';
+import { Box, Tab, Tabs, Typography, Grid } from '@material-ui/core';
 import { PokeStats } from './PokeStats';
 import { PokeWeakness } from './PokeWeakness';
 
@@ -47,32 +47,40 @@ export const PokeMenu: React.FC<Props> = ({ pokeData }) => {
   };
 
   return (
-    <Box sx={{ width: '100' }}>
+    <Box sx={{ width: '100' }} style={{ backgroundColor: 'white', borderStyle: 'solid', borderRadius: '10px', borderColor: 'grey' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs TabIndicatorProps={{ style: { backgroundColor: 'black' } }} value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs variant="fullWidth" TabIndicatorProps={{ style: { backgroundColor: 'black' } }} value={value} onChange={handleChange} aria-label="poke menu">
           <Tab label={PokeTab.Stats} {...a11yProps(0)} />
           <Tab label={PokeTab.Moves} {...a11yProps(1)} />
           <Tab label={PokeTab.Sprites} {...a11yProps(2)} />
           <Tab label={PokeTab.Weakness} {...a11yProps(3)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        <PokeStats pokeStats={pokeData.data.stats} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        {pokeData.data.moves.map((move: any, index: number) => (
-          <Typography>{move.move.name}</Typography>
-        ))}
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <img src={pokeData.data.sprites.front_default} alt="front_default" />
-        <img src={pokeData.data.sprites.back_default} alt="back_default" />
-        <img src={pokeData.data.sprites.front_shiny} alt="front_shiny" />
-        <img src={pokeData.data.sprites.back_shiny} alt="back_shiny" />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <PokeWeakness pokeTypes={pokeData.data.types} />
-      </TabPanel>
+      <Box sx={{ height: '10%' }}>
+        <TabPanel value={value} index={0}>
+          <PokeStats pokeStats={pokeData.data.stats} />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          {pokeData.data.moves.map((move: any, index: number) => (
+            <Typography>{move.move.name}</Typography>
+          ))}
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <Grid container justifyContent="center">
+            <img src={pokeData.data.sprites.front_default} alt="front_default" />
+            <img src={pokeData.data.sprites.back_default} alt="back_default" />
+            <img src={pokeData.data.sprites.front_shiny} alt="front_shiny" />
+            <img src={pokeData.data.sprites.back_shiny} alt="back_shiny" />
+          </Grid>
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <Grid container justifyContent="center">
+            <Grid item xs={6}>
+              <PokeWeakness pokeTypes={pokeData.data.types} />
+            </Grid>
+          </Grid>
+        </TabPanel>
+      </Box>
     </Box>
   );
 };
