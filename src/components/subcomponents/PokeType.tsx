@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme: any) => ({
     maxWidth: '80px',
     maxHeight: '20px',
     textTransform: 'none',
+    margin: '5px',
   },
 }));
 

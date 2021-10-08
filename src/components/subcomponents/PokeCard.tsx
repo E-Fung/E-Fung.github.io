@@ -57,12 +57,12 @@ export const PokeCard: React.FC<Props> = ({ pokeMainData }) => {
               <Grid item style={{ padding: '5px', margin: '2px', zIndex: 10 }}>
                 <PokePic id={pokeMainData.data.id} />
               </Grid>
-              <Grid style={{ padding: '5px', margin: '2px' }}>
+              <Grid style={{ padding: '5px', margin: '2px', zIndex: 10 }}>
                 <Typography variant="h6" style={{ textAlign: 'center' }}>
                   {capFirstLetter(pokeMainData.data.name)}
                 </Typography>
               </Grid>
-              <Grid style={{ padding: '5px', margin: '2px' }}>
+              <Grid style={{ padding: '5px', margin: '2px', zIndex: 10 }}>
                 <PokeType types={pokeMainData.data.types} />
               </Grid>
             </Grid>

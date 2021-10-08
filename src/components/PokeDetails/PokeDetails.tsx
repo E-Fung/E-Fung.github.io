@@ -60,24 +60,24 @@ export const PokeDetails: React.FC = () => {
           padding: '10px',
         }}
       >
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ height: '10%' }}>
           <Typography variant="h5" style={{ textAlign: 'center', fontWeight: 'bold' }}>
             {capFirstLetter(pokeData.data.name)}
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={3} style={{ height: '10%' }}>
           <PokeType types={pokeData.data.types} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ height: '10%' }}>
           <Typography style={{ textAlign: 'center' }}>{pokeSpecies.data.flavor_text_entries[0].flavor_text.replace('\f', ' ')}</Typography>
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={10} style={{ height: '70%' }}>
           <Grid container justifyContent="center">
             <PokeMenu pokeData={pokeData} />
           </Grid>
         </Grid>
       </Grid>
-      <Grid container style={{ height: '20vh', width: '100%', backgroundColor: 'grey' }}>
+      <Grid container style={{ height: '20vh', width: '100%', backgroundColor: 'white' }}>
         <PokeEvol pokeSpecies={pokeSpecies} />
       </Grid>
     </Grid>

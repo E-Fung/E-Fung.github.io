@@ -2,13 +2,13 @@ export const generateIdTexture = (id: string) => {
   // Set variables
   const bitmapShift: number = 10;
   const copyAmount: number = 1;
-  const canvasSize: number = 100; //size of each picture which will then be repeated
-  const fontSize: number = canvasSize / copyAmount;
+  const canvasWidth: number = 100; //size of each picture which will then be repeated
+  const fontSize: number = canvasWidth / copyAmount;
   const fontStyle: string = `Bold ${fontSize}px Arial`;
 
   // Create canvas
   const bitmap = document.createElement('canvas');
-  bitmap.height = bitmap.width = canvasSize;
+  bitmap.height = bitmap.width = canvasWidth;
 
   // Create 2d context
   const g = bitmap.getContext('2d')!;
@@ -19,7 +19,7 @@ export const generateIdTexture = (id: string) => {
 
   // Add text on the canvas
   const textWidth = g.measureText(id).width;
-  g.scale(canvasSize / textWidth, 1);
+  g.scale(canvasWidth / textWidth, 1);
   const fillAndDuplicateText = (index: number) => g.fillText(id, 0, fontSize * ++index - bitmapShift);
 
   Array(copyAmount + 1)

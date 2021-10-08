@@ -26,6 +26,14 @@ export interface pokeNameUrlObj {
   };
 }
 
+export interface Move2 {
+  name: string;
+  url: string;
+}
+export interface Move {
+  move: Move2;
+}
+
 export interface pokeMainData {
   data: {
     types: pokeType[];
@@ -33,6 +41,14 @@ export interface pokeMainData {
     id: number;
     species: {
       url: string;
+    };
+    moves: Move[];
+    stats: {};
+    sprites: {
+      front_default: string;
+      back_default: string;
+      front_shiny: string;
+      back_shiny: string;
     };
   };
 }

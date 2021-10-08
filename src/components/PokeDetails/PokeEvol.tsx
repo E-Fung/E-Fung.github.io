@@ -34,10 +34,10 @@ export const PokeEvol: React.FC<Props> = ({ pokeSpecies }) => {
   }
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container justifyContent="center" style={{ height: '100%' }}>
       {evolChain.map((pokeStag: any, index: number) => (
         <React.Fragment key={index}>
-          <Grid item xs={2} style={{ padding: 0 }}>
+          <Grid item xs={2} style={{ padding: 0, height: '100%' }}>
             <Grid container justifyContent="center" alignContent="center" style={{ height: '100%', width: '100%' }}>
               <PokePic id={pokeStag.url.slice(-4).match(/[0-9]/g).join('')} />
             </Grid>
