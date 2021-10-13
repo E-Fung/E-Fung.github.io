@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { getApiEvolData } from '../../service/pokeService';
 import { PokePic } from './../subcomponents/PokePic';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import { capFirstLetter } from './../../utility/utility';
 import { pokeEvol } from './../../model/pokeModels';
 
 type Props = { pokeSpecies: any };

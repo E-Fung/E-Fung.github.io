@@ -28,6 +28,19 @@ const useStyles = makeStyles((theme) => ({
       transform: 'translateY(0%)',
     },
   },
+  general: {
+    padding: '5px',
+    margin: '2px',
+    zIndex: 10,
+  },
+  idBackground: {
+    width: '100%',
+    boxSizing: 'border-box',
+    padding: '5px',
+    height: '100%',
+    position: 'absolute',
+    zIndex: 5,
+  },
 }));
 
 type Props = { pokeMainData: pokeMainData };
@@ -51,18 +64,18 @@ export const PokeCard: React.FC<Props> = ({ pokeMainData }) => {
         >
           <Grid style={{ background: getPokeScheme(pokeMainData.data.types, '0.35') }}>
             <Grid container direction="column" style={{ width: '100%', height: '100%' }}>
-              <Grid style={{ width: '100%', boxSizing: 'border-box', padding: '5px', height: '100%', position: 'absolute', zIndex: 5 }}>
+              <Grid className={classes.idBackground}>
                 <IdBackground id={pokeMainData.data.id.toString().padStart(3, '0')} />
               </Grid>
-              <Grid item style={{ padding: '5px', margin: '2px', zIndex: 10 }}>
+              <Grid item className={classes.general}>
                 <PokePic id={pokeMainData.data.id} />
               </Grid>
-              <Grid style={{ padding: '5px', margin: '2px', zIndex: 10 }}>
+              <Grid className={classes.general}>
                 <Typography variant="h6" style={{ textAlign: 'center' }}>
                   {capFirstLetter(pokeMainData.data.name)}
                 </Typography>
               </Grid>
-              <Grid style={{ padding: '5px', margin: '2px', zIndex: 10 }}>
+              <Grid className={classes.general}>
                 <PokeType types={pokeMainData.data.types} />
               </Grid>
             </Grid>

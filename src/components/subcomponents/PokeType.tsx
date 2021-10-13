@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme: any) => ({
   },
 }));
 
-export const PokeType: React.FC<Props> = ({ types }) => {
+export const PokeType: React.FC<Props> = ({ types, children }) => {
   const classes: any = useStyles();
   const { setCurrType } = useAppContext();
 
@@ -101,7 +101,13 @@ export const PokeType: React.FC<Props> = ({ types }) => {
   return (
     <Grid container direction="row" justifyContent="space-around">
       {types.map((type, index) => (
-        <Button variant="contained" key={index} className={`${classes[type.type.name]} ${classes.typeButton}`} onClick={() => handleTypeClick(type.type.name)}>
+        <Button
+          startIcon={children}
+          variant="contained"
+          key={index}
+          className={`${classes[type.type.name]} ${classes.typeButton}`}
+          onClick={() => handleTypeClick(type.type.name)}
+        >
           {capFirstLetter(type.type.name)}
         </Button>
       ))}

@@ -16,7 +16,6 @@ const useStyles = makeStyles(() => ({
 type Props = { id: string };
 export const IdBackground: React.FC<Props> = ({ id }) => {
   const [newTexture] = useState(generateIdTexture(id));
-  console.log(newTexture);
   const classes = useStyles();
   return <Grid className={classes.patternBackground} style={{ backgroundImage: `url(${newTexture})` }}></Grid>;
 };

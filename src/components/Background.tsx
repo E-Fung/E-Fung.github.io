@@ -9,6 +9,9 @@ const useStyles = makeStyles(() => ({
     minHeight: '100vh',
     width: '100%',
     position: 'absolute',
+    top: '0',
+    left: '0',
+    zIndex: -1,
   },
 }));
 
@@ -19,19 +22,9 @@ export const Background: React.FC = () => {
     <Grid
       className={classes.sizing}
       style={{
-        top: '0',
-        left: '0',
-        zIndex: -1,
+        backgroundColor: matchColor(currType, '0.35'),
       }}
     >
-      <Grid
-        className={classes.sizing}
-        style={{
-          // background: `linear-gradient( to right, rgb(240, 128, 48, 0.35), rgb(120, 200, 80, 0.35))`,
-          backgroundColor: matchColor(currType, '0.35'),
-        }}
-      />
-
       <Grid
         className={classes.sizing}
         style={{

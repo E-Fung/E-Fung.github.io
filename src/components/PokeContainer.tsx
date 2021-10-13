@@ -10,22 +10,27 @@ export const PokeContainer: React.FC = () => {
   const { currType } = useAppContext();
 
   useEffect(() => {
-    loadMorePokemon(false);
+    let firstLoad: boolean = true;
+    loadMorePokemon(firstLoad);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currType]);
 
-  const loadPokemon = async (offsetParam: boolean) => {
+  const loadPokemon = async (firstLoad: boolean) => {
     let totalPokemonPerLoad: number = 20;
-    let pokemonOffset: number = offsetParam ? pokeList.length + totalPokemonPerLoad : 0;
+    let pokemonOffset: number = firstLoad ? 0 : pokeList.length + totalPokemonPerLoad;
     let url: string = `https://pokeapi.co/api/v2/pokemon?limit=${totalPokemonPerLoad}&offset=${pokemonOffset}`;
     let listBasicPoke: pokeNameUrl[] = (await getBasicPoke(url)).data.results;
     let additionalPokemons: pokeMainData[] = await getPokeList(listBasicPoke);
     additionalPokemons = additionalPokemons.slice(0, 899);
-    setPokeList((p) => [...p, ...additionalPokemons]);
+    if (firstLoad) {
+      setPokeList(additionalPokemons);
+    } else {
+      setPokeList((p) => [...p, ...additionalPokemons]);
+    }
   };
 
-  const loadPokemonType = async (offsetParam: boolean) => {
-    let pokemonOffset: number = offsetParam ? pokeList.length + 20 : 20;
+  const loadPokemonType = async (firstLoad: boolean) => {
+    let pokemonOffset: number = firstLoad ? 20 : pokeList.length + 20;
     let typeUrl: string = `https://pokeapi.co/api/v2/type/${currType}`;
     let listBasicPoke: typeNameUrl[] = (await getBasicType(typeUrl)).data.pokemon;
     let additionalPokemons: pokeMainData[] = await getTypePokeList(listBasicPoke);
@@ -35,7 +40,14 @@ export const PokeContainer: React.FC = () => {
   };
 
   const loadMorePokemon = (firstLoad: boolean): void => {
-    currType === 'none' ? loadPokemon(firstLoad) : loadPokemonType(firstLoad);
+    switch (currType) {
+      case 'none': {
+        loadPokemon(firstLoad);
+        break;
+      }
+      default:
+        loadPokemonType(firstLoad);
+    }
   };
 
   return (
@@ -44,7 +56,7 @@ export const PokeContainer: React.FC = () => {
         return <PokeCard key={index} pokeMainData={pokemon} />;
       })}
       <Grid container style={{ width: '100%' }} justifyContent="center">
-        <Button variant="contained" onClick={() => loadMorePokemon(true)}>
+        <Button variant="contained" onClick={() => loadMorePokemon(false)}>
           Load More
         </Button>
       </Grid>
