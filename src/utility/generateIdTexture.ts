@@ -1,8 +1,8 @@
 export const generateIdTexture = (id: string) => {
   // Set variables
-  const bitmapShift: number = 10;
-  const copyAmount: number = 1;
-  const canvasWidth: number = 100; //size of each picture which will then be repeated
+  const bitmapShift: number = 0;
+  const copyAmount: number = 6;
+  const canvasWidth: number = 200; //size of each picture which will then be repeated
   const fontSize: number = canvasWidth / copyAmount;
   const fontStyle: string = `Bold ${fontSize}px Arial`;
 

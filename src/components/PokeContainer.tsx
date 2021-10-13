@@ -40,14 +40,7 @@ export const PokeContainer: React.FC = () => {
   };
 
   const loadMorePokemon = (firstLoad: boolean): void => {
-    switch (currType) {
-      case 'none': {
-        loadPokemon(firstLoad);
-        break;
-      }
-      default:
-        loadPokemonType(firstLoad);
-    }
+    currType === 'none' ? loadPokemon(firstLoad) : loadPokemonType(firstLoad);
   };
 
   return (

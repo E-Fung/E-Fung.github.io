@@ -26,7 +26,6 @@ export const PokeDetails: React.FC = () => {
     let speciesUrl: string = data.data.species.url;
     let speciesData: any = await getSinglePoke(speciesUrl);
     setPokeSpecies(speciesData);
-    console.log(speciesData);
   };
 
   if (!pokeData || !pokeSpecies) {
