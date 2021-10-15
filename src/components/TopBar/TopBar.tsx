@@ -1,10 +1,22 @@
 import React from 'react';
 import { useAppContext } from '../../AppContext';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router';
+
+const useStyles = makeStyles(() => ({
+  reset: {
+    color: 'white',
+    backgroundColor: 'red',
+  },
+  return: {
+    color: 'white',
+    backgroundColor: 'grey',
+  },
+}));
 
 export const TopBar: React.FC = () => {
   const { setCurrType } = useAppContext();
+  const classes = useStyles();
   const history = useHistory();
 
   const onReset = () => {
@@ -19,10 +31,10 @@ export const TopBar: React.FC = () => {
 
   return (
     <Grid container justifyContent="space-between">
-      <Button onClick={() => onReset()} style={{ color: 'white', backgroundColor: 'red' }}>
+      <Button onClick={() => onReset()} className={classes.reset}>
         Reset
       </Button>
-      <Button onClick={() => onReturn()} style={{ color: 'white', backgroundColor: 'grey' }}>
+      <Button onClick={() => onReturn()} className={classes.return}>
         Return
       </Button>
     </Grid>

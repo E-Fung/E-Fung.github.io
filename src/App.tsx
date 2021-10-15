@@ -16,6 +16,7 @@ const useStyles = makeStyles(() => ({
   },
   appbar: {
     minWidth: '100%',
+    height: '5vh',
   },
 }));
 
@@ -29,7 +30,7 @@ function App() {
     <div className="App" style={{ height: '100%' }}>
       <AppContextProvider>
         <Router>
-          <AppBar position="sticky" className={classes.appbar}>
+          <AppBar position="sticky">
             <Toolbar>
               <TopBar />
             </Toolbar>

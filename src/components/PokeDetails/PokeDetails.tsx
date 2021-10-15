@@ -12,7 +12,7 @@ export const PokeDetails: React.FC = () => {
   const [currUrl] = useState(window.location.href as string);
   const [pokeData, setPokeData] = useState<pokeMainData>();
   const [pokeSpecies, setPokeSpecies] = useState<any>();
-  let id = currUrl.slice(-3).match(/[0-9]/g)!.join('');
+  let id: number = +currUrl.slice(-3).match(/[0-9]/g)!.join('');
 
   useEffect(() => {
     getPokemon();
@@ -70,8 +70,8 @@ export const PokeDetails: React.FC = () => {
         <Grid item xs={12} style={{ height: '10%' }}>
           <Typography style={{ textAlign: 'center' }}>{pokeSpecies.data.flavor_text_entries[0].flavor_text.replace('\f', ' ')}</Typography>
         </Grid>
-        <Grid item xs={10} style={{ height: '70%' }}>
-          <Grid container justifyContent="center">
+        <Grid item xs={10} style={{ height: '70%', maxHeight: '100%', maxWidth: '70%' }}>
+          <Grid container justifyContent="center" style={{ maxHeight: '100%', maxWidth: '100%' }}>
             <PokeMenu pokeData={pokeData} />
           </Grid>
         </Grid>

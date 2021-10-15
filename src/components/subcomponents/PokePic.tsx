@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
-type Props = { id: number | string };
+type Props = { id: number };
 
 export const PokePic: React.FC<Props> = ({ id }) => {
   const history = useHistory();

@@ -65,13 +65,13 @@ export const PokeCard: React.FC<Props> = ({ pokeMainData }) => {
           <Grid style={{ background: getPokeScheme(pokeMainData.data.types, '0.35') }}>
             <Grid container direction="column" style={{ width: '100%', height: '100%' }}>
               <Grid className={classes.idBackground}>
-                <IdBackground id={pokeMainData.data.id.toString().padStart(3, '0')} />
+                <IdBackground id={pokeMainData.data.id} />
               </Grid>
               <Grid item className={classes.general}>
                 <PokePic id={pokeMainData.data.id} />
               </Grid>
               <Grid className={classes.general}>
-                <Typography variant="h6" style={{ textAlign: 'center' }}>
+                <Typography variant="h5" style={{ fontWeight: 500, textAlign: 'center' }}>
                   {capFirstLetter(pokeMainData.data.name)}
                 </Typography>
               </Grid>

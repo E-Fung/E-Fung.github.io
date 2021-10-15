@@ -6,7 +6,7 @@ import { useAppContext } from '../../AppContext';
 
 type Props = { types: pokeType[] };
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles(() => ({
   fire: {
     backgroundColor: 'rgb(240, 128, 48)',
     color: 'white',

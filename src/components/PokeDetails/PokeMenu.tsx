@@ -11,7 +11,6 @@ enum PokeTab {
   Sprites = 'Sprites',
   Weakness = 'Weak to',
 }
-
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -21,8 +20,9 @@ interface TabPanelProps {
 const useStyles = makeStyles(() => ({
   panel: {
     overflowY: 'scroll',
-    height: '170px',
+    maxHeight: 'inherit',
     padding: '5px',
+    height: '250px',
   },
 }));
 
@@ -42,7 +42,14 @@ export const PokeMenu: React.FC<Props> = ({ pokeData }) => {
   function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
     return (
-      <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+      <div
+        role="tabpanel"
+        style={{ height: '85%' }}
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
         {value === index && (
           <Grid container justifyContent="center" alignContent="center" className={classes.panel}>
             {children}
@@ -71,9 +78,11 @@ export const PokeMenu: React.FC<Props> = ({ pokeData }) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         {pokeData.data.moves.map((move: any, index: number) => (
-          <Typography display="inline" variant="overline">
-            {move.move.name}
-          </Typography>
+          <Grid style={{ width: '100%' }}>
+            <Typography variant="overline" display="inline">
+              {move.move.name}
+            </Typography>
+          </Grid>
         ))}
       </TabPanel>
       <TabPanel value={value} index={2}>

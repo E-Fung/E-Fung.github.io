@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { generateIdTexture } from '../../utility/generateIdTexture';
 
@@ -11,9 +11,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-type Props = { id: string };
+type Props = { id: number };
 export const IdBackground: React.FC<Props> = ({ id }) => {
-  const [newTexture] = useState(generateIdTexture(` #${id} `));
+  const [newTexture, setNewTexture] = useState('' as string);
   const classes = useStyles();
-  return <img className={classes.patternBackground} alt="awda" src={newTexture}></img>;
+
+  useEffect(() => {
+    setNewTexture(generateIdTexture(` #${id.toString().padStart(3, '0')} `));
+  }, [id]);
+
+  return <img className={classes.patternBackground} alt="ID Background" src={newTexture}></img>;
 };
