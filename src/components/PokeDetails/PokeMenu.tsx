@@ -2,8 +2,15 @@ import * as React from 'react';
 import { Box, Tab, Tabs, Typography, Grid, makeStyles } from '@material-ui/core';
 import { PokeStats } from './PokeStats';
 import { PokeWeakness } from './PokeWeakness';
-import { matchColor } from '../../utility/utility';
-import { pokeMainData } from '../../model/pokeModels';
+import { matchColor, capFirstLetter } from '../../utility/utility';
+import { pokeMainData, MoveInterface } from '../../model/pokeModels';
+import { PokeMoves } from './PokeMoves';
+
+enum PokeMove {
+  Machine = 'machine',
+  LevelUp = 'level-up',
+  Tutor = 'tutor',
+}
 
 enum PokeTab {
   Stats = 'Base Stats',
@@ -19,10 +26,13 @@ interface TabPanelProps {
 
 const useStyles = makeStyles(() => ({
   panel: {
-    overflowY: 'scroll',
-    maxHeight: 'inherit',
+    // overflowY: 'scroll',
     padding: '5px',
-    height: '250px',
+    height: '180px',
+  },
+  moveGrid: {
+    width: '100%',
+    padding: '5px',
   },
 }));
 
@@ -36,20 +46,13 @@ function a11yProps(index: number) {
 }
 
 export const PokeMenu: React.FC<Props> = ({ pokeData }) => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0 as number);
   const classes = useStyles();
 
   function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
     return (
-      <div
-        role="tabpanel"
-        style={{ height: '85%' }}
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
+      <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
         {value === index && (
           <Grid container justifyContent="center" alignContent="center" className={classes.panel}>
             {children}
@@ -77,13 +80,7 @@ export const PokeMenu: React.FC<Props> = ({ pokeData }) => {
         <PokeStats pokeStats={pokeData.data.stats} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {pokeData.data.moves.map((move: any, index: number) => (
-          <Grid style={{ width: '100%' }}>
-            <Typography variant="overline" display="inline">
-              {move.move.name}
-            </Typography>
-          </Grid>
-        ))}
+        <PokeMoves pokeMoves={pokeData.data.moves} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Grid container justifyContent="center">

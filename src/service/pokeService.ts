@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { pokeNameUrlObj, pokeNameUrl, pokeMainData, typeNameUrlObj, typeNameUrl } from '../model/pokeModels';
+import { pokeNameUrlObj, pokeNameUrl, pokeMainData, typeNameUrlObj, typeNameUrl, MoveInterface } from '../model/pokeModels';
 
 export const getSinglePoke = (apiUrl: string): Promise<pokeMainData> => {
   return axios.get(apiUrl).then((resp: any) => resp);
@@ -41,6 +41,14 @@ export const getListTypeInfo = (listType: any[]): Promise<any[]> => {
   let promiseArray: any[] = [];
   for (let i = 0; i < listType.length; i++) {
     promiseArray.push(axios.get(listType[i].type.url));
+  }
+  return Promise.all(promiseArray);
+};
+
+export const getTypeOfMove = (listType: MoveInterface[]): Promise<any[]> => {
+  let promiseArray: any[] = [];
+  for (let i = 0; i < listType.length; i++) {
+    promiseArray.push(axios.get(listType[i].move.url));
   }
   return Promise.all(promiseArray);
 };

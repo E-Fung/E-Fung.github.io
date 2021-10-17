@@ -25,13 +25,32 @@ export interface pokeNameUrlObj {
     results: pokeNameUrl[];
   };
 }
-
-export interface Move2 {
+export interface Move {
   name: string;
   url: string;
 }
-export interface Move {
-  move: Move2;
+export interface MoveLearnMethod {
+  name: string;
+  url: string;
+}
+export interface VersionGroup {
+  name: string;
+  url: string;
+}
+export interface VersionGroupDetail {
+  level_learned_at: number;
+  move_learn_method: MoveLearnMethod;
+  version_group: VersionGroup;
+}
+export interface MoveInterface {
+  move: Move;
+  data: {
+    type: {
+      name: string;
+    };
+  };
+  version_group_details: VersionGroupDetail[];
+  type: string;
 }
 
 export interface pokeMainData {
@@ -42,7 +61,7 @@ export interface pokeMainData {
     species: {
       url: string;
     };
-    moves: Move[];
+    moves: MoveInterface[];
     stats: {};
     sprites: {
       front_default: string;
