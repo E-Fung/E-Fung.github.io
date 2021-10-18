@@ -1,16 +1,10 @@
 import * as React from 'react';
-import { Box, Tab, Tabs, Typography, Grid, makeStyles } from '@material-ui/core';
+import { Box, Tab, Tabs, Grid, makeStyles } from '@material-ui/core';
 import { PokeStats } from './PokeStats';
 import { PokeWeakness } from './PokeWeakness';
-import { matchColor, capFirstLetter } from '../../utility/utility';
-import { pokeMainData, MoveInterface } from '../../model/pokeModels';
+import { matchColor } from '../../utility/utility';
+import { pokeMainData } from '../../model/pokeModels';
 import { PokeMoves } from './PokeMoves';
-
-enum PokeMove {
-  Machine = 'machine',
-  LevelUp = 'level-up',
-  Tutor = 'tutor',
-}
 
 enum PokeTab {
   Stats = 'Base Stats',
@@ -29,10 +23,6 @@ const useStyles = makeStyles(() => ({
     // overflowY: 'scroll',
     padding: '5px',
     height: '180px',
-  },
-  moveGrid: {
-    width: '100%',
-    padding: '5px',
   },
 }));
 

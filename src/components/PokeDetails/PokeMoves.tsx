@@ -110,6 +110,7 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
   const classes: any = useStyles();
   useEffect(() => {
     getTypeMove();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokeMoves]);
 
   const getTypeMove = async () => {
@@ -133,34 +134,94 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
 
   return (
     <Grid container style={{ overflow: 'auto', height: '100%' }}>
-      {pMoves
-        .filter((move: MoveInterface, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.LevelUp)
-        .sort((a, b) => (a.version_group_details[0].level_learned_at > b.version_group_details[0].level_learned_at ? 1 : -1))
-        .map((move: MoveInterface, index: number) => (
-          <Grid key={index} container justifyContent="space-between" className={classes.moveGrid}>
-            <Typography>{capFirstLetter(move.move.name)}</Typography>
-            <Typography>{move.version_group_details[0].level_learned_at}</Typography>
-            <TypeButt type={move.data.type.name} />
-          </Grid>
-        ))}
-      {pMoves
-        .filter((move: MoveInterface, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.Machine)
-        .sort((a, b) => a.move.name.localeCompare(b.move.name))
-        .map((move: MoveInterface, index: number) => (
-          <Grid key={index} container justifyContent="space-between" className={classes.moveGrid}>
-            <Typography>{capFirstLetter(move.move.name)}</Typography>
-            <TypeButt type={move.data.type.name} />
-          </Grid>
-        ))}
-      {pMoves
-        .filter((move: MoveInterface, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.Tutor)
-        .sort((a, b) => a.move.name.localeCompare(b.move.name))
-        .map((move: MoveInterface, index: number) => (
-          <Grid key={index} container justifyContent="space-between" className={classes.moveGrid}>
-            <Typography>{capFirstLetter(move.move.name)}</Typography>
-            <TypeButt type={move.data.type.name} />
-          </Grid>
-        ))}
+      <Grid container>
+        <Grid
+          container
+          justifyContent="space-between"
+          className={classes.moveGrid}
+          style={{ backgroundColor: 'white', position: 'sticky', height: '50px', top: '0px', zIndex: 100 }}
+        >
+          <Typography variant="h5">{capFirstLetter(PokeMove.LevelUp)}</Typography>
+        </Grid>
+        {pMoves
+          .filter((move: MoveInterface, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.LevelUp)
+          .sort((a, b) => (a.version_group_details[0].level_learned_at > b.version_group_details[0].level_learned_at ? 1 : -1))
+          .map((move: MoveInterface, index: number) => (
+            <Grid key={index} container justifyContent="space-between" className={classes.moveGrid}>
+              <Grid item xs={2} style={{ height: '100%' }}>
+                <Grid container style={{ height: '100%' }} alignContent="center">
+                  <Typography>{move.version_group_details[0].level_learned_at}</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={6} style={{ height: '100%' }}>
+                <Grid container style={{ height: '100%' }} alignContent="center">
+                  <Typography style={{ textAlign: 'center' }}>{capFirstLetter(move.move.name)}</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4}>
+                <TypeButt type={move.data.type.name} />
+              </Grid>
+            </Grid>
+          ))}
+        <Grid container className={classes.moveGrid} style={{ backgroundColor: 'white', height: '50px' }}></Grid>
+      </Grid>
+      <Grid container>
+        <Grid
+          container
+          justifyContent="space-between"
+          className={classes.moveGrid}
+          style={{ background: 'white', position: 'sticky', height: '50px', top: '0px', zIndex: 200 }}
+        >
+          <Typography variant="h5">{capFirstLetter(PokeMove.Machine)}</Typography>
+        </Grid>
+        {pMoves
+          .filter((move: MoveInterface, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.Machine)
+          .sort((a, b) => a.move.name.localeCompare(b.move.name))
+          .map((move: MoveInterface, index: number) => (
+            <Grid key={index} container justifyContent="space-between" className={classes.moveGrid}>
+              <Grid item xs={2} style={{ height: '100%' }}>
+                <Grid container style={{ height: '100%' }} alignContent="center"></Grid>
+              </Grid>
+              <Grid item xs={6} style={{ height: '100%' }}>
+                <Grid container style={{ height: '100%' }} alignContent="center">
+                  <Typography>{capFirstLetter(move.move.name)}</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4}>
+                <TypeButt type={move.data.type.name} />
+              </Grid>
+            </Grid>
+          ))}
+        <Grid container className={classes.moveGrid} style={{ backgroundColor: 'white', height: '50px' }}></Grid>
+      </Grid>
+      <Grid container>
+        <Grid
+          container
+          justifyContent="space-between"
+          className={classes.moveGrid}
+          style={{ backgroundColor: 'white', zIndex: 300, position: 'sticky', height: '50px', top: '0px' }}
+        >
+          <Typography variant="h5">{capFirstLetter(PokeMove.Tutor)}</Typography>
+        </Grid>
+        {pMoves
+          .filter((move: MoveInterface, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.Tutor)
+          .sort((a, b) => a.move.name.localeCompare(b.move.name))
+          .map((move: MoveInterface, index: number) => (
+            <Grid key={index} container justifyContent="space-between" className={classes.moveGrid}>
+              <Grid item xs={2} style={{ height: '100%' }}>
+                <Grid container style={{ height: '100%' }} alignContent="center"></Grid>
+              </Grid>
+              <Grid item xs={6} style={{ height: '100%' }}>
+                <Grid container style={{ height: '100%' }} alignContent="center">
+                  <Typography>{capFirstLetter(move.move.name)}</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4}>
+                <TypeButt type={move.data.type.name} />
+              </Grid>
+            </Grid>
+          ))}
+      </Grid>
     </Grid>
   );
 };
