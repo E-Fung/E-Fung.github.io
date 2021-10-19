@@ -1,18 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, makeStyles } from '@material-ui/core';
 import { PokePic } from '../subcomponents/PokePic';
-import { getSinglePoke } from '../../service/pokeService';
+import { getSinglePoke, getSinglePokeSpecies } from '../../service/pokeService';
 import { pokeMainData } from '../../model/pokeModels';
+import { PokeSpecies } from '../../model/pokeSpecies';
 import { PokeEvol } from './PokeEvol';
 import { getPokeScheme, capFirstLetter } from './../../utility/utility';
 import { PokeType } from '../subcomponents/PokeType';
 import { PokeMenu } from './PokeMenu';
 
+const useStyles = makeStyles(() => ({
+  picBackground: {
+    height: '25vh',
+    borderBottomLeftRadius: '5%',
+    borderBottomRightRadius: '5%',
+  },
+  content: {
+    height: '50vh',
+    width: '100%',
+    borderTopLeftRadius: '5%',
+    borderTopRightRadius: '5%',
+    opacity: '1',
+    backgroundColor: 'white',
+    padding: '10px',
+  },
+  evolution: {
+    height: '20vh',
+    width: '100%',
+    backgroundColor: 'white',
+  },
+}));
+
 export const PokeDetails: React.FC = () => {
   const [currUrl] = useState(window.location.href as string);
   const [pokeData, setPokeData] = useState<pokeMainData>();
-  const [pokeSpecies, setPokeSpecies] = useState<any>();
+  const [pokeSpecies, setPokeSpecies] = useState<PokeSpecies>();
   let id: number = +currUrl.slice(-3).match(/[0-9]/g)!.join('');
+  const classes = useStyles();
 
   useEffect(() => {
     getPokemon();
@@ -21,10 +45,10 @@ export const PokeDetails: React.FC = () => {
 
   const getPokemon = async () => {
     let url: string = `https://pokeapi.co/api/v2/pokemon/${id}`;
-    let data: any = await getSinglePoke(url);
+    let data: pokeMainData = await getSinglePoke(url);
     setPokeData(data);
     let speciesUrl: string = data.data.species.url;
-    let speciesData: any = await getSinglePoke(speciesUrl);
+    let speciesData: PokeSpecies = await getSinglePokeSpecies(speciesUrl);
     setPokeSpecies(speciesData);
   };
 
@@ -34,31 +58,10 @@ export const PokeDetails: React.FC = () => {
 
   return (
     <Grid style={{ background: getPokeScheme(pokeData.data.types, '0.9') }}>
-      <Grid
-        container
-        justifyContent="center"
-        style={{
-          height: '25vh',
-          // background: getPokeScheme(pokeData.data.types, '0.9'),
-          borderBottomLeftRadius: '5%',
-          borderBottomRightRadius: '5%',
-        }}
-      >
+      <Grid container justifyContent="center" className={classes.picBackground}>
         <PokePic id={id} />
       </Grid>
-      <Grid
-        justifyContent="center"
-        container
-        style={{
-          height: '50vh',
-          width: '100%',
-          borderTopLeftRadius: '5%',
-          borderTopRightRadius: '5%',
-          opacity: '1',
-          backgroundColor: 'white',
-          padding: '10px',
-        }}
-      >
+      <Grid justifyContent="center" container className={classes.content}>
         <Grid item xs={12} style={{ height: '10%' }}>
           <Typography variant="h5" style={{ textAlign: 'center', fontWeight: 'bold' }}>
             {capFirstLetter(pokeData.data.name)}
@@ -76,7 +79,7 @@ export const PokeDetails: React.FC = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container style={{ height: '20vh', width: '100%', backgroundColor: 'white' }}>
+      <Grid container className={classes.evolution}>
         <PokeEvol pokeSpecies={pokeSpecies} />
       </Grid>
     </Grid>

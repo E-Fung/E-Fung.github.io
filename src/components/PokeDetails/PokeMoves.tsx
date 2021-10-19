@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { capFirstLetter } from '../../utility/utility';
 import { MoveInterface } from '../../model/pokeModels';
 import { getTypeOfMove } from '../../service/pokeService';
+import { CircularProgress } from '@material-ui/core';
 
 type Props = { pokeMoves: MoveInterface[] };
 
@@ -16,6 +17,10 @@ const useStyles = makeStyles(() => ({
   moveGrid: {
     width: '100%',
     padding: '5px',
+  },
+  menuBlocks: {
+    height: '35px',
+    backgroundColor: 'white',
   },
   fire: {
     backgroundColor: 'rgb(240, 128, 48)',
@@ -99,7 +104,6 @@ const useStyles = makeStyles(() => ({
     margin: '5px',
   },
 }));
-
 interface TypeProps {
   children?: React.ReactNode;
   type: string;
@@ -129,7 +133,7 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
   }
 
   if (!pMoves) {
-    return <></>;
+    return <CircularProgress />;
   }
 
   return (
@@ -138,8 +142,8 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
         <Grid
           container
           justifyContent="space-between"
-          className={classes.moveGrid}
-          style={{ backgroundColor: 'white', position: 'sticky', height: '50px', top: '0px', zIndex: 100 }}
+          className={`${classes.moveGrid} ${classes.menuBlocks}`}
+          style={{ zIndex: 100, position: 'sticky', top: '0px' }}
         >
           <Typography variant="h5">{capFirstLetter(PokeMove.LevelUp)}</Typography>
         </Grid>
@@ -163,14 +167,14 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
               </Grid>
             </Grid>
           ))}
-        <Grid container className={classes.moveGrid} style={{ backgroundColor: 'white', height: '50px' }}></Grid>
+        <Grid container className={classes.menuBlocks}></Grid>
       </Grid>
       <Grid container>
         <Grid
           container
           justifyContent="space-between"
-          className={classes.moveGrid}
-          style={{ background: 'white', position: 'sticky', height: '50px', top: '0px', zIndex: 200 }}
+          className={`${classes.moveGrid} ${classes.menuBlocks}`}
+          style={{ zIndex: 200, position: 'sticky', top: '0px' }}
         >
           <Typography variant="h5">{capFirstLetter(PokeMove.Machine)}</Typography>
         </Grid>
@@ -192,14 +196,14 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
               </Grid>
             </Grid>
           ))}
-        <Grid container className={classes.moveGrid} style={{ backgroundColor: 'white', height: '50px' }}></Grid>
+        <Grid container className={classes.menuBlocks}></Grid>
       </Grid>
       <Grid container>
         <Grid
           container
           justifyContent="space-between"
-          className={classes.moveGrid}
-          style={{ backgroundColor: 'white', zIndex: 300, position: 'sticky', height: '50px', top: '0px' }}
+          className={`${classes.moveGrid} ${classes.menuBlocks}`}
+          style={{ zIndex: 300, position: 'sticky', top: '0px' }}
         >
           <Typography variant="h5">{capFirstLetter(PokeMove.Tutor)}</Typography>
         </Grid>
@@ -222,6 +226,7 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
             </Grid>
           ))}
       </Grid>
+      <Grid container className={classes.menuBlocks} style={{ height: '60%' }} />
     </Grid>
   );
 };

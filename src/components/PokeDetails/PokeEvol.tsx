@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import { getApiEvolData } from '../../service/pokeService';
 import { PokePic } from './../subcomponents/PokePic';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { pokeEvol } from './../../model/pokeModels';
+import { PokeSpecies } from '../../model/pokeSpecies';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
-type Props = { pokeSpecies: any };
+type Props = { pokeSpecies: PokeSpecies };
 
 export const PokeEvol: React.FC<Props> = ({ pokeSpecies }) => {
   const [evolChain, setEvolChain] = useState<pokeEvol[]>();

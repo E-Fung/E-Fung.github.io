@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { pokeNameUrlObj, pokeNameUrl, pokeMainData, typeNameUrlObj, typeNameUrl, MoveInterface } from '../model/pokeModels';
+import { PokeSpecies } from '../model/pokeSpecies';
 
 export const getSinglePoke = (apiUrl: string): Promise<pokeMainData> => {
+  return axios.get(apiUrl).then((resp: any) => resp);
+};
+
+export const getSinglePokeSpecies = (apiUrl: string): Promise<PokeSpecies> => {
   return axios.get(apiUrl).then((resp: any) => resp);
 };
 

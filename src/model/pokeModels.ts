@@ -62,7 +62,7 @@ export interface pokeMainData {
       url: string;
     };
     moves: MoveInterface[];
-    stats: {};
+    stats: PokeStatsModel[];
     sprites: {
       front_default: string;
       back_default: string;
@@ -75,4 +75,15 @@ export interface pokeMainData {
 export interface pokeEvol {
   name: string;
   url: string;
+}
+
+export interface Stat {
+  name: string;
+  url: string;
+}
+
+export interface PokeStatsModel {
+  base_stat: number;
+  effort: number;
+  stat: Stat;
 }
