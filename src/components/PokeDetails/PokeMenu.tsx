@@ -3,7 +3,7 @@ import { Box, Tab, Tabs, Grid, makeStyles } from '@material-ui/core';
 import { PokeStats } from './PokeStats';
 import { PokeWeakness } from './PokeWeakness';
 import { matchColor } from '../../utility/utility';
-import { pokeMainData } from '../../model/pokeModels';
+import { PokeMainDataModel } from '../../model/pokeModels';
 import { PokeMoves } from './PokeMoves';
 
 enum PokeTab {
@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-type Props = { pokeData: pokeMainData };
+type Props = { pokeData: PokeMainDataModel };
 
 function a11yProps(index: number) {
   return {
@@ -52,7 +52,7 @@ export const PokeMenu: React.FC<Props> = ({ pokeData }) => {
     );
   }
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number): void => {
     setValue(newValue);
   };
 

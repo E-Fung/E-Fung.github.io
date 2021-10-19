@@ -1,6 +1,6 @@
 import { Grid, Typography, Paper, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
-import { pokeMainData } from '../../model/pokeModels';
+import { PokeMainDataModel } from '../../model/pokeModels';
 import { PokePic } from './PokePic';
 import { getPokeScheme, capFirstLetter } from '../../utility/utility';
 import { PokeType } from './PokeType';
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type Props = { pokeMainData: pokeMainData };
+type Props = { pokeMainData: PokeMainDataModel };
 
 export const PokeCard: React.FC<Props> = ({ pokeMainData }) => {
   const [hover, setHover] = useState(false as boolean);

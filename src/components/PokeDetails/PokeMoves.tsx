@@ -1,11 +1,11 @@
 import { Grid, Typography, makeStyles, Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { capFirstLetter } from '../../utility/utility';
-import { MoveInterface } from '../../model/pokeModels';
+import { PokeMoveModel } from '../../model/pokeModels';
 import { getTypeOfMove } from '../../service/pokeService';
 import { CircularProgress } from '@material-ui/core';
 
-type Props = { pokeMoves: MoveInterface[] };
+type Props = { pokeMoves: PokeMoveModel[] };
 
 enum PokeMove {
   Machine = 'machine',
@@ -110,14 +110,15 @@ interface TypeProps {
 }
 
 export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
-  const [pMoves, setPMoves] = useState<MoveInterface[]>();
+  const [pMoves, setPMoves] = useState<PokeMoveModel[]>();
   const classes: any = useStyles();
+
   useEffect(() => {
     getTypeMove();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokeMoves]);
 
-  const getTypeMove = async () => {
+  const getTypeMove = async (): Promise<void> => {
     let pokeMoveType = await getTypeOfMove(pokeMoves);
     let tempPMoves = pokeMoveType.map((item, i) => Object.assign({}, item, pokeMoves[i]));
     setPMoves(tempPMoves);
@@ -148,9 +149,9 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
           <Typography variant="h5">{capFirstLetter(PokeMove.LevelUp)}</Typography>
         </Grid>
         {pMoves
-          .filter((move: MoveInterface, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.LevelUp)
+          .filter((move: PokeMoveModel, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.LevelUp)
           .sort((a, b) => (a.version_group_details[0].level_learned_at > b.version_group_details[0].level_learned_at ? 1 : -1))
-          .map((move: MoveInterface, index: number) => (
+          .map((move: PokeMoveModel, index: number) => (
             <Grid key={index} container justifyContent="space-between" className={classes.moveGrid}>
               <Grid item xs={2} style={{ height: '100%' }}>
                 <Grid container style={{ height: '100%' }} alignContent="center">
@@ -179,9 +180,9 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
           <Typography variant="h5">{capFirstLetter(PokeMove.Machine)}</Typography>
         </Grid>
         {pMoves
-          .filter((move: MoveInterface, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.Machine)
+          .filter((move: PokeMoveModel, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.Machine)
           .sort((a, b) => a.move.name.localeCompare(b.move.name))
-          .map((move: MoveInterface, index: number) => (
+          .map((move: PokeMoveModel, index: number) => (
             <Grid key={index} container justifyContent="space-between" className={classes.moveGrid}>
               <Grid item xs={2} style={{ height: '100%' }}>
                 <Grid container style={{ height: '100%' }} alignContent="center"></Grid>
@@ -208,9 +209,9 @@ export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
           <Typography variant="h5">{capFirstLetter(PokeMove.Tutor)}</Typography>
         </Grid>
         {pMoves
-          .filter((move: MoveInterface, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.Tutor)
+          .filter((move: PokeMoveModel, index: number) => move.version_group_details[0].move_learn_method.name === PokeMove.Tutor)
           .sort((a, b) => a.move.name.localeCompare(b.move.name))
-          .map((move: MoveInterface, index: number) => (
+          .map((move: PokeMoveModel, index: number) => (
             <Grid key={index} container justifyContent="space-between" className={classes.moveGrid}>
               <Grid item xs={2} style={{ height: '100%' }}>
                 <Grid container style={{ height: '100%' }} alignContent="center"></Grid>

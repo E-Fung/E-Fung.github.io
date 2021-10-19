@@ -2,17 +2,21 @@ import { useState, useEffect } from 'react';
 import { getListTypeInfo } from './../../service/pokeService';
 import { PokeType } from './../subcomponents/PokeType';
 import { Star } from '@material-ui/icons';
-type Props = { pokeTypes: any };
+import { PokeTypeModel } from './../../model/pokeModels';
+import { CircularProgress } from '@material-ui/core';
+
+type Props = { pokeTypes: PokeTypeModel[] };
+
 export const PokeWeakness: React.FC<Props> = ({ pokeTypes }) => {
-  const [weaknessList, setWeaknessList] = useState<any[]>();
-  const [superWeaknessList, setSuperWeaknessList] = useState<any[]>();
+  const [weaknessList, setWeaknessList] = useState<PokeTypeModel[]>();
+  const [superWeaknessList, setSuperWeaknessList] = useState<PokeTypeModel[]>();
 
   useEffect(() => {
     getTypeInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getTypeInfo = async () => {
+  const getTypeInfo = async (): Promise<void> => {
     let tempTypeInfo = await getListTypeInfo(pokeTypes);
     let tempWeaknessList: string[] = [];
     tempTypeInfo.forEach((type) => {
@@ -31,17 +35,19 @@ export const PokeWeakness: React.FC<Props> = ({ pokeTypes }) => {
       });
     });
     //some weaknesses are stronger than others (when both types share that weakness)
-    let superWeaknessList = tempWeaknessList.filter((type, index) => tempWeaknessList.indexOf(type) !== index);
+    let superWeaknessList: string[] = tempWeaknessList.filter((type, index) => tempWeaknessList.indexOf(type) !== index);
     tempWeaknessList = tempWeaknessList.filter((type, index) => superWeaknessList.indexOf(type) === -1);
-    let objSuperWeakList = superWeaknessList.map((itr) => ({ type: { name: itr } }));
 
-    let objWeaknessList = tempWeaknessList.map((itr) => ({ type: { name: itr } }));
+    let objSuperWeakList: PokeTypeModel[] = superWeaknessList.map((itr) => ({ type: { name: itr } }));
+    let objWeaknessList: PokeTypeModel[] = tempWeaknessList.map((itr) => ({ type: { name: itr } }));
     setWeaknessList(objWeaknessList);
     setSuperWeaknessList(objSuperWeakList);
   };
+
   if (!weaknessList || !superWeaknessList) {
-    return <></>;
+    return <CircularProgress />;
   }
+
   return (
     <>
       <PokeType types={superWeaknessList}>

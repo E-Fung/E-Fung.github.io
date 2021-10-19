@@ -6,7 +6,6 @@ import { PokeStatsModel } from '../../model/pokeModels';
 type Props = { pokeStats: PokeStatsModel[] };
 
 export const PokeStats: React.FC<Props> = ({ pokeStats }) => {
-  console.log(pokeStats);
   return (
     <Grid container justifyContent="center">
       {pokeStats.map((stat: PokeStatsModel, index: number) => (

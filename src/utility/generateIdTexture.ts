@@ -1,4 +1,4 @@
-export const generateIdTexture = (id: string) => {
+export const generateIdTexture = (id: string): string => {
   // Set variables
   const bitmapShift: number = 0;
   const copyAmount: number = 6;
@@ -28,6 +28,6 @@ export const generateIdTexture = (id: string) => {
       fillAndDuplicateText(i);
     });
 
-  const background = bitmap.toDataURL('image/png');
+  const background: string = bitmap.toDataURL('image/png');
   return background;
 };

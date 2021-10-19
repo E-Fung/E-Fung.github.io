@@ -1,10 +1,10 @@
 import React from 'react';
 import { Grid, Button, makeStyles } from '@material-ui/core';
-import { pokeType } from '../../model/pokeModels';
+import { PokeTypeModel } from '../../model/pokeModels';
 import { capFirstLetter } from '../../utility/utility';
 import { useAppContext } from '../../AppContext';
 
-type Props = { types: pokeType[] };
+type Props = { types: PokeTypeModel[] };
 
 const useStyles = makeStyles(() => ({
   fire: {

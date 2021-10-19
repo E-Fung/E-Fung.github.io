@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
-import { PokePic } from '../subcomponents/PokePic';
+
+import { PokeMainDataModel } from '../../model/pokeModels';
+import { PokeSpeciesModel } from '../../model/pokeSpecies';
+
 import { getSinglePoke, getSinglePokeSpecies } from '../../service/pokeService';
-import { pokeMainData } from '../../model/pokeModels';
-import { PokeSpecies } from '../../model/pokeSpecies';
-import { PokeEvol } from './PokeEvol';
 import { getPokeScheme, capFirstLetter } from './../../utility/utility';
+
+import { PokePic } from '../subcomponents/PokePic';
+import { PokeEvol } from './PokeEvol';
 import { PokeType } from '../subcomponents/PokeType';
 import { PokeMenu } from './PokeMenu';
 
@@ -33,8 +36,8 @@ const useStyles = makeStyles(() => ({
 
 export const PokeDetails: React.FC = () => {
   const [currUrl] = useState(window.location.href as string);
-  const [pokeData, setPokeData] = useState<pokeMainData>();
-  const [pokeSpecies, setPokeSpecies] = useState<PokeSpecies>();
+  const [pokeData, setPokeData] = useState<PokeMainDataModel>();
+  const [pokeSpecies, setPokeSpecies] = useState<PokeSpeciesModel>();
   let id: number = +currUrl.slice(-3).match(/[0-9]/g)!.join('');
   const classes = useStyles();
 
@@ -45,10 +48,12 @@ export const PokeDetails: React.FC = () => {
 
   const getPokemon = async () => {
     let url: string = `https://pokeapi.co/api/v2/pokemon/${id}`;
-    let data: pokeMainData = await getSinglePoke(url);
+    let data: PokeMainDataModel = await getSinglePoke(url);
     setPokeData(data);
     let speciesUrl: string = data.data.species.url;
-    let speciesData: PokeSpecies = await getSinglePokeSpecies(speciesUrl);
+    let speciesData: PokeSpeciesModel = await getSinglePokeSpecies(speciesUrl);
+    console.log(data);
+    console.log(speciesData);
     setPokeSpecies(speciesData);
   };
 
@@ -71,7 +76,9 @@ export const PokeDetails: React.FC = () => {
           <PokeType types={pokeData.data.types} />
         </Grid>
         <Grid item xs={12} style={{ height: '10%' }}>
-          <Typography style={{ textAlign: 'center' }}>{pokeSpecies.data.flavor_text_entries[0].flavor_text.replace('\f', ' ')}</Typography>
+          <Typography style={{ textAlign: 'center' }}>
+            {pokeSpecies.data.flavor_text_entries.filter((entry) => entry.language.name === 'en')[0].flavor_text.replace('\f', ' ')}
+          </Typography>
         </Grid>
         <Grid item xs={10} style={{ height: '70%', maxHeight: '100%', maxWidth: '70%' }}>
           <Grid container justifyContent="center" style={{ maxHeight: '100%', maxWidth: '100%' }}>

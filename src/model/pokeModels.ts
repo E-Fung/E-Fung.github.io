@@ -1,67 +1,67 @@
-export interface pokeType {
+export interface PokeTypeModel {
   type: {
-    url: string;
+    url?: string;
     name: string;
   };
 }
 
-export interface pokeNameUrl {
+export interface PokeNameUrlModel {
   url: string;
   name: string;
 }
 
-export interface typeNameUrl {
-  pokemon: pokeNameUrl;
+export interface TypeSpecificModel {
+  pokemon: PokeNameUrlModel;
 }
 
-export interface typeNameUrlObj {
+export interface TypeSpecificAPIReturnModel {
   data: {
-    pokemon: typeNameUrl[];
+    pokemon: TypeSpecificModel[];
   };
 }
 
-export interface pokeNameUrlObj {
+export interface PokeAPIReturnModel {
   data: {
-    results: pokeNameUrl[];
+    results: PokeNameUrlModel[];
   };
 }
-export interface Move {
+export interface MoveLowLevelModel {
   name: string;
   url: string;
 }
-export interface MoveLearnMethod {
+export interface MoveLearnMethodModel {
   name: string;
   url: string;
 }
-export interface VersionGroup {
+export interface VersionGroupModel {
   name: string;
   url: string;
 }
-export interface VersionGroupDetail {
+export interface VersionGroupDetailModel {
   level_learned_at: number;
-  move_learn_method: MoveLearnMethod;
-  version_group: VersionGroup;
+  move_learn_method: MoveLearnMethodModel;
+  version_group: VersionGroupModel;
 }
-export interface MoveInterface {
-  move: Move;
+export interface PokeMoveModel {
+  move: MoveLowLevelModel;
   data: {
     type: {
       name: string;
     };
   };
-  version_group_details: VersionGroupDetail[];
+  version_group_details: VersionGroupDetailModel[];
   type: string;
 }
 
-export interface pokeMainData {
+export interface PokeMainDataModel {
   data: {
-    types: pokeType[];
+    types: PokeTypeModel[];
     name: string;
     id: number;
     species: {
       url: string;
     };
-    moves: MoveInterface[];
+    moves: PokeMoveModel[];
     stats: PokeStatsModel[];
     sprites: {
       front_default: string;
@@ -72,12 +72,12 @@ export interface pokeMainData {
   };
 }
 
-export interface pokeEvol {
+export interface PokeEvolModel {
   name: string;
   url: string;
 }
 
-export interface Stat {
+export interface StatModel {
   name: string;
   url: string;
 }
@@ -85,5 +85,5 @@ export interface Stat {
 export interface PokeStatsModel {
   base_stat: number;
   effort: number;
-  stat: Stat;
+  stat: StatModel;
 }

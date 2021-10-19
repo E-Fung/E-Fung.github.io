@@ -1,4 +1,4 @@
-import { pokeType } from '../model/pokeModels';
+import { PokeTypeModel } from '../model/pokeModels';
 
 export const capFirstLetter = (name: string): string => {
   let result = name;
@@ -19,7 +19,7 @@ export const capFirstLetter = (name: string): string => {
   return result;
 };
 
-export const getPokeScheme = (pokeTypes: pokeType[], opacity: string): string => {
+export const getPokeScheme = (pokeTypes: PokeTypeModel[], opacity: string): string => {
   let left: string = matchColor(pokeTypes[0].type.name, opacity);
   let right: string = pokeTypes.length >= 2 ? matchColor(pokeTypes[1].type.name, opacity) : left;
   return `linear-gradient( to right, ${left}, ${right})`;
