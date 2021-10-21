@@ -4,6 +4,7 @@ import { PokeNameUrlModel, PokeMainDataModel, TypeSpecificModel } from '../model
 import { Button, Grid } from '@material-ui/core';
 import { PokeCard } from './subcomponents/PokeCard';
 import { useAppContext } from '../AppContext';
+import { usePromiseTracker, trackPromise } from 'react-promise-tracker';
 
 let maxPokemon: number = 898;
 
@@ -11,6 +12,7 @@ export const PokeContainer: React.FC = () => {
   const [pokeList, setPokeList] = useState([] as PokeMainDataModel[]);
   const [loadButton, setLoadButton] = useState(true as boolean);
   const { currType } = useAppContext();
+  const { promiseInProgress } = usePromiseTracker();
 
   useEffect(() => {
     let firstLoad: boolean = true;
@@ -43,7 +45,7 @@ export const PokeContainer: React.FC = () => {
   };
 
   const loadMorePokemon = (firstLoad: boolean): void => {
-    currType === 'none' ? loadPokemon(firstLoad) : loadPokemonType(firstLoad);
+    trackPromise(currType === 'none' ? loadPokemon(firstLoad) : loadPokemonType(firstLoad));
   };
 
   return (
@@ -53,7 +55,7 @@ export const PokeContainer: React.FC = () => {
       })}
       {loadButton && (
         <Grid container style={{ width: '100%' }} justifyContent="center">
-          <Button variant="contained" onClick={() => loadMorePokemon(false)}>
+          <Button disabled={promiseInProgress} variant="contained" onClick={() => loadMorePokemon(false)}>
             Load More
           </Button>
         </Grid>
