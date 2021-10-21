@@ -52,8 +52,6 @@ export const PokeDetails: React.FC = () => {
     setPokeData(data);
     let speciesUrl: string = data.data.species.url;
     let speciesData: PokeSpeciesModel = await getSinglePokeSpecies(speciesUrl);
-    console.log(data);
-    console.log(speciesData);
     setPokeSpecies(speciesData);
   };
 
