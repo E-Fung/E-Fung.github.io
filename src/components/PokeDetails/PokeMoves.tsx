@@ -112,13 +112,12 @@ interface TypeProps {
 export const PokeMoves: React.FC<Props> = ({ pokeMoves }) => {
   const [pMoves, setPMoves] = useState<PokeMoveModel[]>();
   const classes: any = useStyles();
-
   useEffect(() => {
     getTypeMove();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokeMoves]);
 
-  const getTypeMove = async (): Promise<void> => {
+  const getTypeMove = async () => {
     let pokeMoveType = await getTypeOfMove(pokeMoves);
     let tempPMoves = pokeMoveType.map((item, i) => Object.assign({}, item, pokeMoves[i]));
     setPMoves(tempPMoves);
