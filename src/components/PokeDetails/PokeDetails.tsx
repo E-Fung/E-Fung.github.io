@@ -26,6 +26,7 @@ const useStyles = makeStyles(() => ({
     opacity: '1',
     backgroundColor: 'white',
     padding: '10px',
+    alignContent:''
   },
   evolution: {
     height: '20vh',
@@ -78,7 +79,7 @@ export const PokeDetails: React.FC = () => {
             {pokeSpecies.data.flavor_text_entries.filter((entry) => entry.language.name === 'en')[0].flavor_text.replace('\f', ' ')}
           </Typography>
         </Grid>
-        <Grid item xs={10} style={{ height: '70%', maxHeight: '100%', maxWidth: '70%' }}>
+        <Grid item xs={10} style={{ height: '60%', maxHeight: '100%', maxWidth: '70%' }}>
           <Grid container justifyContent="center" style={{ maxHeight: '100%', maxWidth: '100%' }}>
             <PokeMenu pokeData={pokeData} />
           </Grid>
