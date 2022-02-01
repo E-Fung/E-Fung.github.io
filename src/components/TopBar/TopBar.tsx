@@ -25,7 +25,7 @@ export const TopBar: React.FC = () => {
 
   const onReturn = () => {
     history.push({
-      pathname: `/`,
+      pathname: `/tsPokedex`,
     });
   };
 

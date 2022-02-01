@@ -37,7 +37,7 @@ function App() {
           </AppBar>
           <Grid style={{ position: 'relative' }}>
             <Container className={classes.container} maxWidth="md" style={{ backgroundColor: 'rgb(0,0,0,0.7)', height: '100%' }}>
-              <Route path={'/'} exact component={PokeContainer} />
+              <Route path={'/tsPokedex'} exact component={PokeContainer} />
               {myRange.map((id) => (
                 <Route path={`/Pokemon/Details/${id}`} key={id} component={PokeDetails} />
               ))}
